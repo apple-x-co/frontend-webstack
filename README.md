@@ -2,6 +2,8 @@
 
 ## Get started
 
+**minimum**
+
 ```bash
 npm install ejs glob rollup
 npm install rollup-plugin-sass rollup-plugin-serve
@@ -19,14 +21,37 @@ cp -ap THIS_PROJECT/main.js .
 cp -ap THIS_PROJECT/rollup.config.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
 cp -ap THIS_PROJECT/template-contexts.mjs .
+cp -ap THIS_PROJECT/template-global.mjs .
 ```
 
 ## How to build
 
 ```bash
 rollup --config
-# OR ENV=prod rollup --config # use env
 # OR npm run build
+```
+
+## How to build with ENV
+
+```bash
+touch env.xxx.mjs
+ENV=xxx rollup --config
+```
+
+`env.xxx.mjs`
+```:js
+const vars = {
+  someKey: 'SomeValue',
+};
+
+export {
+  vars,
+}
+```
+
+`some.ejs`
+```ejs
+<%= envVars.someKey %>
 ```
 
 ## How to development
