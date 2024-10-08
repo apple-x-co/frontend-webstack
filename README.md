@@ -7,9 +7,11 @@
 ```bash
 npm install ejs glob rollup
 npm install rollup-plugin-sass rollup-plugin-serve
+# npm install eslint --save-dev
 
 node -v > .node-version
 
+mkdir -p dist/{assets,css,js}
 mkdir -p src/{modules,styles,template/includes}
 touch src/modules/index.js
 touch src/styles/main.scss
@@ -22,13 +24,46 @@ cp -ap THIS_PROJECT/rollup.config.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
 cp -ap THIS_PROJECT/template-contexts.mjs .
 cp -ap THIS_PROJECT/template-global.mjs .
+# cp -ap THIS_PROJECT/env.prod.mjs .
+# cp -ap THIS_PROJECT/eslint.config.mjs .
 ```
+
+### Directory structure
+
+| ディレクトリ                             | 用途                      | 定数           |
+|------------------------------------|-------------------------|--------------|
+| `dist/`                            | ビルド後のファイル               | DIST_DIR     |
+| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | ASSETS_ROOT  |
+| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | CSS_ROOT     |
+| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | JS_ROOT      |
+| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | TMP_DIST_DIR |
+| `src/`                             | ソースファイル                 |              |
+| `src/modules/`                     | JavaScript モジュール（ライブラリ） |              |
+| `src/styes/`                       | SCSS ファイル               |              |
+| `src/templates/`                   | EJS ファイル                |              |
+| `src/templates/includes/`          | EJS インクルードファイル          |              |
+
+### Files
+
+| ファイル                    | 用途            |
+|-------------------------|---------------|
+| `env.[ENV_NAME].mjs`    | 環境変数定義        |
+| `main.js`               | エントリーポイント     |
+| `template-contexts.mjs` | EJS のテンプレート変数 |
+| `template-global.mjs`   | EJS のグローバル変数  |
+
+### Danger files
+
+| ファイル                    | 用途         |
+|-------------------------|------------|
+| `rollup.config.mjs`     | Rollup の定義 |
+| `template-compiler.mjs` | EJS のコンパイル |
 
 ## How to build
 
 ```bash
-rollup --config
-# OR npm run build
+npm run build
+# rollup --config
 ```
 
 ## How to build with ENV
@@ -57,6 +92,8 @@ export {
 ## How to development
 
 ```bash
-rollup --config --watch # default port 3000
-# npm run watch
+npm run watch
+# rollup --config --watch
 ```
+
+※ `dist/` に出力は行いません。
