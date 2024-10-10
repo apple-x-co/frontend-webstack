@@ -59,6 +59,16 @@ cp -ap THIS_PROJECT/template-global.mjs .
 | `rollup.config.mjs`     | Rollup の定義 |
 | `template-compiler.mjs` | EJS のコンパイル |
 
+### Environment
+
+| 名前        | 用途            | 例                        |
+|-----------|---------------|--------------------------|
+| ENV       | 環境変数          | `local`, `stage`, `prod` |
+| HOST      | ローカルサーバーのホスト名 | `localhost`              |
+| PORT      | ローカルサーバーのポート  | `3000`                   |
+| OPEN_PAGE | ローカルで開くページ    | `/`                      |
+
+
 ## How to build
 
 ```bash

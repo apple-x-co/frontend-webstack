@@ -65,12 +65,14 @@ if (process.env.ROLLUP_WATCH) {
     serve({
       open: true,
       contentBase: OUTPUT_DIR,
+      host: process.env.HOST ?? 'localhost',
       port: process.env.PORT ?? 3000,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Pragma': 'no-cache',
         'Cache-Control': 'no-cache',
       },
+      openPage: process.env.OPEN_PAGE ?? '/',
       onListening: function (server) {
         const address = server.address();
         const host = address.address === '::' ? 'localhost' : address.address;
