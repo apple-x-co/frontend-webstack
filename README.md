@@ -30,18 +30,18 @@ cp -ap THIS_PROJECT/template-global.mjs .
 
 ### Directory structure
 
-| ディレクトリ                             | 用途                      | 定数           |
-|------------------------------------|-------------------------|--------------|
-| `dist/`                            | ビルド後のファイル               | DIST_DIR     |
-| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | ASSETS_ROOT  |
-| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | CSS_ROOT     |
-| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | JS_ROOT      |
-| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | TMP_DIST_DIR |
-| `src/`                             | ソースファイル                 |              |
-| `src/modules/`                     | JavaScript モジュール（ライブラリ） |              |
-| `src/styes/`                       | SCSS ファイル               |              |
-| `src/templates/`                   | EJS ファイル                |              |
-| `src/templates/includes/`          | EJS インクルードファイル          |              |
+| ディレクトリ                             | 用途                      | 定数             |
+|------------------------------------|-------------------------|----------------|
+| `dist/`                            | ビルド後のファイル               | `DIST_DIR`     |
+| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | `ASSETS_ROOT`  |
+| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | `CSS_ROOT`     |
+| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | `JS_ROOT`      |
+| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | `TMP_DIST_DIR` |
+| `src/`                             | ソースファイル                 |                |
+| `src/modules/`                     | JavaScript モジュール（ライブラリ） |                |
+| `src/styes/`                       | SCSS ファイル               |                |
+| `src/templates/`                   | EJS ファイル                |                |
+| `src/templates/includes/`          | EJS インクルードファイル          |                |
 
 ### Files
 
@@ -61,12 +61,12 @@ cp -ap THIS_PROJECT/template-global.mjs .
 
 ### Environment
 
-| 名前        | 用途            | 例                        |
-|-----------|---------------|--------------------------|
-| ENV       | 環境変数          | `local`, `stage`, `prod` |
-| HOST      | ローカルサーバーのホスト名 | `localhost`              |
-| PORT      | ローカルサーバーのポート  | `3000`                   |
-| OPEN_PAGE | ローカルで開くページ    | `/`                      |
+| 名前          | 用途            | 例                        |
+|-------------|---------------|--------------------------|
+| `ENV`       | 環境変数          | `local`, `stage`, `prod` |
+| `HOST`      | ローカルサーバーのホスト名 | `localhost`              |
+| `PORT`      | ローカルサーバーのポート  | `3000`                   |
+| `OPEN_PAGE` | ローカルで開くページ    | `/`                      |
 
 
 ## How to build
