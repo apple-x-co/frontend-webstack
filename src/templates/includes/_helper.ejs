@@ -7,6 +7,16 @@ helper = {
             /** @type {string} */ path
     ) => {
         return meta.path.relative.asset + '/' + path;
+    },
+    css: (
+            /** @type {string} */ path
+    ) => {
+        return meta.path.relative.css + '/' + path;
+    },
+    js: (
+            /** @type {string} */ path
+    ) => {
+        return meta.path.relative.js + '/' + path;
     }
 }
 %>

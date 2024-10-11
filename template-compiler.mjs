@@ -9,6 +9,8 @@ function templateCompiler (
   /** @type {string} */ templateDir, // NOTE: "src/templates/"
   /** @type {string} */ distDir, // NOTE: "dist/" OR "node_modules/.frontend-webstack/"
   /** @type {string} */ assetRoot, // NOTE: "assets/"
+  /** @type {string} */ cssRoot, // NOTE: "css/"
+  /** @type {string} */ jsRoot, // NOTE: "js/"
   /** @type {string} */ ejsPath, // NOTE: "src/templates/index.ejs"
 ) {
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
@@ -20,6 +22,8 @@ function templateCompiler (
   }
 
   const assetDir = distDir + assetRoot;
+  const cssDir = distDir + cssRoot;
+  const jsDir = distDir + jsRoot;
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
@@ -35,6 +39,8 @@ function templateCompiler (
             path: {
               relative: {
                 asset: path.relative(path.dirname(pagePath), assetDir),
+                css: path.relative(path.dirname(pagePath), cssDir),
+                js: path.relative(path.dirname(pagePath), jsDir),
               },
             },
           },
@@ -54,6 +60,8 @@ function templateCompiler (
       path: {
         relative: {
           asset: path.relative(path.dirname(distPath), assetDir),
+          css: path.relative(path.dirname(distPath), cssDir),
+          js: path.relative(path.dirname(distPath), jsDir),
         },
       },
     },
