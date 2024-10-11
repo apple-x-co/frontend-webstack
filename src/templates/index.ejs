@@ -1,3 +1,4 @@
+<%- include('/includes/_helper') -%>
 <%_
 const pageMeta = {
     'title': 'TOP',
@@ -14,5 +15,6 @@ _%>
 <p>HELLO :)</p>
 <a href="news/">NEWS</a>
 <img src="assets/images/sample.png" alt="">
+<%= helper.greeting() %>
 </body>
 </html>
