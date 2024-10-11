@@ -32,7 +32,7 @@ const plugins = [
         ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach((ejsPath) => {
-        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ejsPath);
+        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ASSETS_ROOT, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));

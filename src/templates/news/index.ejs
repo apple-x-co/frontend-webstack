@@ -12,7 +12,7 @@ _%>
 <body>
 <h2>NEWS</h2>
 <ul>
-    <%_ entries.forEach(function(entry) { -%>
+    <%_ meta.page.entries.forEach(function(entry) { -%>
         <li><a href="<%- entry.id %>.html"><%= entry.title %></a></li>
     <%_ }); -%>
 </ul>

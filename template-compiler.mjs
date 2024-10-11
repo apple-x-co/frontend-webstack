@@ -6,9 +6,10 @@ import { templateContexts } from './template-contexts.mjs';
 function templateCompiler (
   /** @type {Object} */ envVars,
   /** @type {Object} */ globalVars,
-  /** @type {string} */ templateDir,
-  /** @type {string} */ distDir,
-  /** @type {string} */ ejsPath,
+  /** @type {string} */ templateDir, // NOTE: "src/templates/" OR "node_modules/.frontend-webstack/"
+  /** @type {string} */ distDir, // NOTE: "dist/"
+  /** @type {string} */ assetRoot, // NOTE: "assets/"
+  /** @type {string} */ ejsPath, // NOTE: "src/templates/index.ejs"
 ) {
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
@@ -18,15 +19,19 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
-  let data = Object.assign({ envVars: envVars }, { globalVars: globalVars });
-
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
     pages.forEach(page => {
       const pagePath = distPath.replace(path.basename(distPath), page.slug);
       fs.writeFileSync(
         pagePath,
-        compiler(Object.assign(data, page.data)),
+        compiler({
+          meta: {
+            env: envVars,
+            global: globalVars,
+            page: page.data,
+          },
+        }),
       );
       info('created ' + pagePath);
     });
@@ -34,11 +39,13 @@ function templateCompiler (
     return;
   }
 
-  if (ejsPath in templateContexts && 'data' in templateContexts[ejsPath]) {
-    data = Object.assign(data, templateContexts[ejsPath].data);
-  }
-
-  fs.writeFileSync(distPath, compiler(data));
+  fs.writeFileSync(distPath, compiler({
+    meta: {
+      env: envVars,
+      global: globalVars,
+      page: ejsPath in templateContexts && 'data' in templateContexts[ejsPath] ? templateContexts[ejsPath].data : null,
+    },
+  }));
   info('created ' + distPath);
 }
 

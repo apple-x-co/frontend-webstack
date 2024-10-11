@@ -68,6 +68,14 @@ cp -ap THIS_PROJECT/template-global.mjs .
 | `rollup.config.mjs`     | Rollup の定義 |
 | `template-compiler.mjs` | EJS のコンパイル |
 
+### EJS Built-in Variables
+
+| 名前                | 用途       |
+|-------------------|----------|
+| `meta.env.xxx`    | 環境変数     |
+| `meta.global.xxx` | グローバル変数  |
+| `meta.page.xxx`   | テンプレート変数 |
+
 ## How to build
 
 ```bash
@@ -95,7 +103,7 @@ export {
 
 `some.ejs`
 ```ejs
-<%= envVars.someKey %>
+<%= meta.env.someKey %>
 ```
 
 ## How to development
