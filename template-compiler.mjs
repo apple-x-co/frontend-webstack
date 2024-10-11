@@ -6,8 +6,8 @@ import { templateContexts } from './template-contexts.mjs';
 function templateCompiler (
   /** @type {Object} */ envVars,
   /** @type {Object} */ globalVars,
-  /** @type {string} */ templateDir, // NOTE: "src/templates/" OR "node_modules/.frontend-webstack/"
-  /** @type {string} */ distDir, // NOTE: "dist/"
+  /** @type {string} */ templateDir, // NOTE: "src/templates/"
+  /** @type {string} */ distDir, // NOTE: "dist/" OR "node_modules/.frontend-webstack/"
   /** @type {string} */ assetRoot, // NOTE: "assets/"
   /** @type {string} */ ejsPath, // NOTE: "src/templates/index.ejs"
 ) {
@@ -18,6 +18,8 @@ function templateCompiler (
   if (! fs.existsSync(path.dirname(distPath))) {
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
+
+  const assetDir = distDir + assetRoot;
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
@@ -30,6 +32,11 @@ function templateCompiler (
             env: envVars,
             global: globalVars,
             page: page.data,
+            path: {
+              relative: {
+                asset: path.relative(path.dirname(pagePath), assetDir),
+              },
+            },
           },
         }),
       );
@@ -44,6 +51,11 @@ function templateCompiler (
       env: envVars,
       global: globalVars,
       page: ejsPath in templateContexts && 'data' in templateContexts[ejsPath] ? templateContexts[ejsPath].data : null,
+      path: {
+        relative: {
+          asset: path.relative(path.dirname(distPath), assetDir),
+        },
+      },
     },
   }));
   info('created ' + distPath);

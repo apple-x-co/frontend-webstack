@@ -1,7 +1,12 @@
 <%
 helper = {
-    greeting: () => {
-        return 'HELLO WORLD!';
+    today: () => {
+        return (new Date()).toLocaleDateString('ja-JP');
+    },
+    asset: (
+            /** @type {string} */ path
+    ) => {
+        return meta.path.relative.asset + '/' + path;
     }
 }
 %>
