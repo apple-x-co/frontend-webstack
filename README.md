@@ -28,7 +28,7 @@ cp -ap THIS_PROJECT/template-global.mjs .
 # cp -ap THIS_PROJECT/eslint.config.mjs .
 ```
 
-[Go document](DOC.md)
+[Go document](Doc.md)
 
 ## How to build
 
