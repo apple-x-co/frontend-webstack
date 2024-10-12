@@ -7,7 +7,7 @@ function templateCompiler (
   /** @type {Object} */ envVars,
   /** @type {Object} */ globalVars,
   /** @type {string} */ templateDir, // NOTE: "src/templates/"
-  /** @type {string} */ distDir, // NOTE: "dist/" OR "node_modules/.frontend-webstack/"
+  /** @type {string} */ distDir, // NOTE: "dist/" OR ".watch/"
   /** @type {string} */ assetRoot, // NOTE: "assets/"
   /** @type {string} */ cssRoot, // NOTE: "css/"
   /** @type {string} */ jsRoot, // NOTE: "js/"

@@ -7,7 +7,7 @@ import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
 
 const DIST_DIR = 'dist/';
-const TMP_DIST_DIR = 'node_modules/.frontend-webstack/';
+const TMP_DIST_DIR = '.watch/';
 const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
 const SOURCE_DIR = 'src/';
 
