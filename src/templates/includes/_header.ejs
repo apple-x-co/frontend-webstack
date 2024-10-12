@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title><%= pageMeta.title %> | <%= meta.global.websiteName %></title>
-<meta name="description" content="<%= pageMeta.description %>" />
+<title><%= page.metaTitle %> | <%= meta.global.websiteName %></title>
+<meta name="description" content="<%= page.metaDescription ?? meta.global.metaDescription %>" />
+<meta name="keywords" content="<%= page.metaKeywords ?? meta.global.metaKeywords %>" />
 <link rel="stylesheet" href="<%- helper.css('style.css') %>" />
 <script src="<%- helper.js('index.js') %>"></script>

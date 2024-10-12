@@ -1,14 +1,14 @@
-<%_ include('/includes/_helper') _%>
-<%_
-const pageMeta = {
-    'title': 'DETAIL | NEWS',
-    'description': 'THIS IS TOP NEWS DETAIL PAGE'
+<% include('/includes/_helper') _%>
+<%
+const page = {
+    'metaTitle': 'DETAIL | NEWS',
+    'metaDescription': 'THIS IS TOP NEWS DETAIL PAGE'
 };
 _%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%- include('/includes/_header', { pageMeta: pageMeta }) -%>
+<%- include('/includes/_header', { page: page }) -%>
 </head>
 <body>
 <h2>NEWS/DETAIL</h2>
