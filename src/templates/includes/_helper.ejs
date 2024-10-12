@@ -6,17 +6,22 @@ helper = {
     asset: (
             /** @type {string} */ path
     ) => {
-        return meta.path.relative.asset + '/' + path;
+        return meta.path.relative.asset + path;
     },
     css: (
             /** @type {string} */ path
     ) => {
-        return meta.path.relative.css + '/' + path;
+        return meta.path.relative.css + path;
     },
     js: (
             /** @type {string} */ path
     ) => {
-        return meta.path.relative.js + '/' + path;
+        return meta.path.relative.js + path;
+    },
+    link: (
+            /** @type {string} */ path
+    ) => {
+      return '';
     }
 }
 %>

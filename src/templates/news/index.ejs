@@ -17,6 +17,7 @@ _%>
         <li><a href="<%- entry.url %>"><%= entry.title %></a></li>
     <%_ }); -%>
 </ul>
-<img src="<%- helper.asset('images/sample.png') %>" alt="" style="max-width: 100px;">
+<img src="<%- helper.asset('/images/sample.png') %>" alt="" style="max-width: 100px;">
+<a href="<% helper.link('/') %>">TOP</a>
 </body>
 </html>

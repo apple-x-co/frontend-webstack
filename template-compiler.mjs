@@ -37,6 +37,7 @@ function templateCompiler (
             global: globalVars,
             page: page.data,
             path: {
+              current: path.relative(distDir, pagePath),
               relative: {
                 asset: path.relative(path.dirname(pagePath), assetDir),
                 css: path.relative(path.dirname(pagePath), cssDir),
@@ -58,6 +59,7 @@ function templateCompiler (
       global: globalVars,
       page: ejsPath in templateContexts && 'data' in templateContexts[ejsPath] ? templateContexts[ejsPath].data : null,
       path: {
+        current: path.relative(distDir, distPath),
         relative: {
           asset: path.relative(path.dirname(distPath), assetDir),
           css: path.relative(path.dirname(distPath), cssDir),
