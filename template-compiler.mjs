@@ -6,9 +6,12 @@ import { templateContexts } from './template-contexts.mjs';
 function templateCompiler (
   /** @type {Object} */ envVars,
   /** @type {Object} */ globalVars,
-  /** @type {string} */ templateDir,
-  /** @type {string} */ distDir,
-  /** @type {string} */ ejsPath,
+  /** @type {string} */ templateDir, // NOTE: "src/templates/"
+  /** @type {string} */ distDir, // NOTE: "dist/" OR ".watch/"
+  /** @type {string} */ assetRoot, // NOTE: "assets/"
+  /** @type {string} */ cssRoot, // NOTE: "css/"
+  /** @type {string} */ jsRoot, // NOTE: "js/"
+  /** @type {string} */ ejsPath, // NOTE: "src/templates/index.ejs"
 ) {
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
@@ -18,7 +21,9 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
-  let data = Object.assign({ envVars: envVars }, { globalVars: globalVars });
+  const assetDir = distDir + assetRoot;
+  const cssDir = distDir + cssRoot;
+  const jsDir = distDir + jsRoot;
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
@@ -26,7 +31,21 @@ function templateCompiler (
       const pagePath = distPath.replace(path.basename(distPath), page.slug);
       fs.writeFileSync(
         pagePath,
-        compiler(Object.assign(data, page.data)),
+        compiler({
+          meta: {
+            env: envVars,
+            global: globalVars,
+            page: page.data,
+            path: {
+              current: path.relative(distDir, pagePath),
+              relative: {
+                asset: path.relative(path.dirname(pagePath), assetDir),
+                css: path.relative(path.dirname(pagePath), cssDir),
+                js: path.relative(path.dirname(pagePath), jsDir),
+              },
+            },
+          },
+        }),
       );
       info('created ' + pagePath);
     });
@@ -34,11 +53,21 @@ function templateCompiler (
     return;
   }
 
-  if (ejsPath in templateContexts && 'data' in templateContexts[ejsPath]) {
-    data = Object.assign(data, templateContexts[ejsPath].data);
-  }
-
-  fs.writeFileSync(distPath, compiler(data));
+  fs.writeFileSync(distPath, compiler({
+    meta: {
+      env: envVars,
+      global: globalVars,
+      page: ejsPath in templateContexts && 'data' in templateContexts[ejsPath] ? templateContexts[ejsPath].data : null,
+      path: {
+        current: path.relative(distDir, distPath),
+        relative: {
+          asset: path.relative(path.dirname(distPath), assetDir),
+          css: path.relative(path.dirname(distPath), cssDir),
+          js: path.relative(path.dirname(distPath), jsDir),
+        },
+      },
+    },
+  }));
   info('created ' + distPath);
 }
 

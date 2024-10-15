@@ -1,20 +1,23 @@
-<%_
-const pageMeta = {
-        'title': 'NEWS',
-        'description': 'THIS IS TOP NEWS PAGE'
+<% include('/includes/_helper') _%>
+<%
+const page = {
+        'metaTitle': 'NEWS',
+        'metaDescription': 'THIS IS TOP NEWS PAGE'
 };
 _%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%- include('/includes/_header', { pageMeta: pageMeta }) -%>
+<%- include('/includes/_header', { page: page }) -%>
 </head>
 <body>
 <h2>NEWS</h2>
 <ul>
-    <%_ entries.forEach(function(entry) { -%>
-        <li><a href="<%- entry.id %>.html"><%= entry.title %></a></li>
+    <%_ meta.page.entries.forEach(function(entry) { -%>
+        <li><a href="<%- entry.url %>"><%= entry.title %></a></li>
     <%_ }); -%>
 </ul>
+<img src="<%- helper.asset('/images/sample.png') %>" alt="" style="max-width: 100px;">
+<a href="<%- helper.absoluteLink('/') %>">TOP</a>
 </body>
 </html>

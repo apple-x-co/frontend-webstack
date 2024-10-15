@@ -7,7 +7,7 @@ import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
 
 const DIST_DIR = 'dist/';
-const TMP_DIST_DIR = 'node_modules/.frontend-webstack/';
+const TMP_DIST_DIR = '.watch/';
 const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
 const SOURCE_DIR = 'src/';
 
@@ -32,7 +32,7 @@ const plugins = [
         ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach((ejsPath) => {
-        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ejsPath);
+        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ASSETS_ROOT, CSS_ROOT, JS_ROOT, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));
@@ -65,12 +65,14 @@ if (process.env.ROLLUP_WATCH) {
     serve({
       open: true,
       contentBase: OUTPUT_DIR,
+      host: process.env.HOST ?? 'localhost',
       port: process.env.PORT ?? 3000,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Pragma': 'no-cache',
         'Cache-Control': 'no-cache',
       },
+      openPage: process.env.OPEN_PAGE ?? '/',
       onListening: function (server) {
         const address = server.address();
         const host = address.address === '::' ? 'localhost' : address.address;
@@ -83,6 +85,10 @@ if (process.env.ROLLUP_WATCH) {
 
   if (! fs.existsSync(TMP_DIST_DIR)) {
     fs.mkdirSync(TMP_DIST_DIR, { recursive: true });
+    fs.symlinkSync(path.resolve(DIST_DIR + ASSETS_ROOT), path.resolve(TMP_DIST_DIR + ASSETS_ROOT), 'dir');
+  }
+
+  if (! fs.existsSync(TMP_DIST_DIR + ASSETS_ROOT)) {
     fs.symlinkSync(path.resolve(DIST_DIR + ASSETS_ROOT), path.resolve(TMP_DIST_DIR + ASSETS_ROOT), 'dir');
   }
 }

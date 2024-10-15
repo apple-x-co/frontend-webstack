@@ -2,8 +2,8 @@ const templateContexts = {
   'src/templates/news/index.ejs': {
     data: {
       entries: [
-        { id: 1, title: 'HELLO :)' },
-        { id: 2, title: 'HELLO :-D' },
+        { id: 1, title: 'HELLO :)', url: '1.html' },
+        { id: 2, title: 'HELLO :-D', url: '2.html' },
       ],
     },
   },

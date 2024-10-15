@@ -28,36 +28,7 @@ cp -ap THIS_PROJECT/template-global.mjs .
 # cp -ap THIS_PROJECT/eslint.config.mjs .
 ```
 
-### Directory structure
-
-| ディレクトリ                             | 用途                      | 定数           |
-|------------------------------------|-------------------------|--------------|
-| `dist/`                            | ビルド後のファイル               | DIST_DIR     |
-| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | ASSETS_ROOT  |
-| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | CSS_ROOT     |
-| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | JS_ROOT      |
-| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | TMP_DIST_DIR |
-| `src/`                             | ソースファイル                 |              |
-| `src/modules/`                     | JavaScript モジュール（ライブラリ） |              |
-| `src/styes/`                       | SCSS ファイル               |              |
-| `src/templates/`                   | EJS ファイル                |              |
-| `src/templates/includes/`          | EJS インクルードファイル          |              |
-
-### Files
-
-| ファイル                    | 用途            |
-|-------------------------|---------------|
-| `env.[ENV_NAME].mjs`    | 環境変数定義        |
-| `main.js`               | エントリーポイント     |
-| `template-contexts.mjs` | EJS のテンプレート変数 |
-| `template-global.mjs`   | EJS のグローバル変数  |
-
-### Danger files
-
-| ファイル                    | 用途         |
-|-------------------------|------------|
-| `rollup.config.mjs`     | Rollup の定義 |
-| `template-compiler.mjs` | EJS のコンパイル |
+[Go document](Doc.md)
 
 ## How to build
 
@@ -86,7 +57,7 @@ export {
 
 `some.ejs`
 ```ejs
-<%= envVars.someKey %>
+<%= meta.env.someKey %>
 ```
 
 ## How to development

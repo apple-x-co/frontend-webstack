@@ -1,5 +1,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title><%= pageMeta.title %> | <%= globalVars.websiteName %></title>
-<meta name="description" content="<%= pageMeta.description %>" />
-<link rel="stylesheet" href="css/style.css">
+<title><%= page.metaTitle %> | <%= meta.global.websiteName %></title>
+<meta name="description" content="<%= page.metaDescription ?? meta.global.metaDescription %>" />
+<meta name="keywords" content="<%= page.metaKeywords ?? meta.global.metaKeywords %>" />
+<meta property="og:locale" content="ja_JP"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="<%= meta.global.websiteName %>"/>
+<meta property="og:title" content="<%= page.metaTitle %> | <%= meta.global.websiteName %>">
+<meta property="og:description" content="<%= page.metaDescription ?? meta.global.metaDescription %>">
+<meta property="og:url" content="<%= meta.global.websiteUrl %>/<%= meta.path.current %>">
+<meta property="og:image" content="<%= meta.global.websiteUrl %>/assets/images/ogp.png">
+<link rel="stylesheet" href="<%- helper.css('/style.css') %>" />
+<script src="<%- helper.js('/index.js') %>"></script>

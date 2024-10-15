@@ -1,16 +1,18 @@
-<%_
-const pageMeta = {
-    'title': 'DETAIL | NEWS',
-    'description': 'THIS IS TOP NEWS DETAIL PAGE'
+<% include('/includes/_helper') _%>
+<%
+const page = {
+    'metaTitle': 'DETAIL | NEWS',
+    'metaDescription': 'THIS IS TOP NEWS DETAIL PAGE'
 };
 _%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%- include('/includes/_header', { pageMeta: pageMeta }) -%>
+<%- include('/includes/_header', { page: page }) -%>
 </head>
 <body>
 <h2>NEWS/DETAIL</h2>
-<%= id %>: <%= title %>
+<%= meta.page.id %>: <%= meta.page.title %>
+<img src="<%- helper.asset('/images/sample.png') %>" alt="" style="max-width: 100px;">
 </body>
 </html>
