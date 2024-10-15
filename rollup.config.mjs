@@ -6,15 +6,19 @@ import serve from 'rollup-plugin-serve';
 import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
 
+// For "Dist"
 const DIST_DIR = 'dist/';
 const TMP_DIST_DIR = '.watch/';
 const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
-const SOURCE_DIR = 'src/';
 
-const TEMPLATE_INCLUDE_ROOT = 'includes/';
 const ASSETS_ROOT = 'assets/';
 const CSS_ROOT = 'css/';
 const JS_ROOT = 'js/';
+
+// For "Source"
+const SOURCE_DIR = 'src/';
+const TEMPLATE_ROOT = 'templates/';
+const TEMPLATE_INCLUDE_ROOT = 'includes/';
 
 const plugins = [
   {
@@ -27,7 +31,7 @@ const plugins = [
         envVars = vars;
       }
 
-      const templateDir = SOURCE_DIR + 'templates/';
+      const templateDir = SOURCE_DIR + TEMPLATE_ROOT;
 
       const ejsPaths = glob.sync(templateDir + '**/*.ejs', {
         // ignore: templateDir + 'includes/**/*.ejs',
