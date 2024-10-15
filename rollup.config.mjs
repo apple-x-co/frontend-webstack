@@ -11,6 +11,7 @@ const TMP_DIST_DIR = '.watch/';
 const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
 const SOURCE_DIR = 'src/';
 
+const TEMPLATE_INCLUDE_ROOT = 'includes/';
 const ASSETS_ROOT = 'assets/';
 const CSS_ROOT = 'css/';
 const JS_ROOT = 'js/';
@@ -29,10 +30,12 @@ const plugins = [
       const templateDir = SOURCE_DIR + 'templates/';
 
       const ejsPaths = glob.sync(templateDir + '**/*.ejs', {
-        ignore: templateDir + 'includes/**/*.ejs',
+        // ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach((ejsPath) => {
-        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ASSETS_ROOT, CSS_ROOT, JS_ROOT, ejsPath);
+        if (! ejsPath.includes(templateDir + TEMPLATE_INCLUDE_ROOT)) {
+          templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ASSETS_ROOT, CSS_ROOT, JS_ROOT, ejsPath);
+        }
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));
