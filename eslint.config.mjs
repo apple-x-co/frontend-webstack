@@ -1,3 +1,4 @@
+// jsの品質を保つためのルールを設定するファイルです。
 export default [
   {
     files: ["main.js", "src/modules/**/*.js"],
