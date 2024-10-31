@@ -92,7 +92,10 @@ if (process.env.ROLLUP_WATCH) {
 
   if (! fs.existsSync(TMP_DIST_DIR)) {
     fs.mkdirSync(TMP_DIST_DIR, { recursive: true });
-    fs.symlinkSync(path.resolve(DIST_DIR + ASSETS_ROOT), path.resolve(TMP_DIST_DIR + ASSETS_ROOT), 'dir');
+  }
+
+  if (! fs.existsSync(path.dirname(path.resolve(TMP_DIST_DIR + ASSETS_ROOT)))) {
+    fs.mkdirSync(path.dirname(path.resolve(TMP_DIST_DIR + ASSETS_ROOT)), { recursive: true });
   }
 
   if (! fs.existsSync(TMP_DIST_DIR + ASSETS_ROOT)) {
