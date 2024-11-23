@@ -47,7 +47,7 @@ function templateCompiler (
           },
         }),
       );
-      info('created ' + pagePath);
+      printInfo('created ' + pagePath);
     });
 
     return;
@@ -68,10 +68,10 @@ function templateCompiler (
       },
     },
   }));
-  info('created ' + distPath);
+  printInfo('created ' + distPath);
 }
 
-function info (/** @type {string} */ message) {
+function printInfo (/** @type {string} */ message) {
   const magenta = '\u001b[36m';
   const bold = '\u001b[1m';
   const reset = '\u001b[0m';
