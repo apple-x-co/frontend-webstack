@@ -116,15 +116,27 @@ if (process.env.ROLLUP_WATCH) {
   }
 }
 
-export default {
-  input: 'main.js',
-  context: 'window',
-  output: [
-    {
-      file: OUTPUT_DIR + JS_ROOT + 'index.js',
-      format: 'esm',
-    },
-  ],
-  watch: watchOptions,
-  plugins: plugins,
-};
+export default [
+  {
+    input: 'main.js',
+    context: 'window',
+    output: [
+      {
+        file: OUTPUT_DIR + JS_ROOT + 'index.js',
+        format: 'esm',
+      },
+    ],
+    watch: watchOptions,
+    plugins: plugins,
+  },
+  {
+    input: 'main-another.js',
+    context: 'window',
+    output: [
+      {
+        file: OUTPUT_DIR + JS_ROOT + 'main-another.js',
+        format: 'esm',
+      },
+    ],
+  }
+];
