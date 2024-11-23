@@ -3,6 +3,7 @@ import { glob } from 'glob';
 import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
+import { styleWriter } from './style-writer.mjs';
 import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
 
@@ -19,6 +20,7 @@ const JS_ROOT = 'js/';
 const SOURCE_DIR = 'src/';
 const TEMPLATE_ROOT = 'templates/';
 const TEMPLATE_INCLUDE_ROOT = 'includes/';
+const STYLES_ROOT = 'styles/';
 
 const plugins = [
   {
@@ -48,7 +50,18 @@ const plugins = [
     },
   },
   sass({
-    output: OUTPUT_DIR + CSS_ROOT + 'style.css',
+    output: (styles, styleNodes) => {
+      // NOTE: "true": main.js で import したファイルすべてを結合して出力ディレクトリの CSS ルートに出力
+      // NOTE: "false": main.js で import したファイル毎に出力ディレクトリに出力。
+      styleWriter(
+        true,
+        styles,
+        styleNodes,
+        SOURCE_DIR + STYLES_ROOT,
+        OUTPUT_DIR,
+        CSS_ROOT
+      );
+    },
     options: {
       outputStyle: 'compressed',
       silenceDeprecations: ['legacy-js-api'],
@@ -85,7 +98,7 @@ if (process.env.ROLLUP_WATCH) {
         const host = address.address === '::' ? 'localhost' : address.address;
         // by using a bound function, we can access options as `this`
         const protocol = this.https ? 'https' : 'http';
-        console.log(`Server listening at ${protocol}://${host}:${address.port}/`);
+        console.info(`Server listening at ${protocol}://${host}:${address.port}/`);
       },
     }),
   ]);
