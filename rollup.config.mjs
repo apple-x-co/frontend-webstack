@@ -3,6 +3,7 @@ import { glob } from 'glob';
 import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
+import { assetsSymlinkMaker } from './assets-symlink-maker.mjs';
 import { styleWriter } from './style-writer.mjs';
 import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
@@ -103,17 +104,7 @@ if (process.env.ROLLUP_WATCH) {
     }),
   ]);
 
-  if (! fs.existsSync(TMP_DIST_DIR)) {
-    fs.mkdirSync(TMP_DIST_DIR, { recursive: true });
-  }
-
-  if (! fs.existsSync(path.dirname(path.resolve(TMP_DIST_DIR + ASSETS_ROOT)))) {
-    fs.mkdirSync(path.dirname(path.resolve(TMP_DIST_DIR + ASSETS_ROOT)), { recursive: true });
-  }
-
-  if (! fs.existsSync(TMP_DIST_DIR + ASSETS_ROOT)) {
-    fs.symlinkSync(path.resolve(DIST_DIR + ASSETS_ROOT), path.resolve(TMP_DIST_DIR + ASSETS_ROOT), 'dir');
-  }
+  assetsSymlinkMaker(TMP_DIST_DIR, DIST_DIR, path.basename(ASSETS_ROOT));
 }
 
 export default [
