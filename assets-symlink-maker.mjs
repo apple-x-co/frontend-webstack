@@ -20,7 +20,7 @@ function assetsSymlinkMaker(
       }
 
       fs.readdirSync(distPath, {}).forEach(_dirName => {
-        const distPath = path.resolve(path.join(distDir, dirName, _dirName));
+        const _distPath = path.resolve(path.join(distDir, dirName, _dirName));
         if (_dirName !== assetDirName) {
           return;
         }
@@ -30,7 +30,11 @@ function assetsSymlinkMaker(
           return;
         }
 
-        fs.symlinkSync(distPath, tempPath, 'dir');
+        if (! fs.existsSync(path.join(tmpPath, dirName))) {
+          fs.mkdirSync(path.join(tmpPath, dirName), { recursive: true });
+        }
+
+        fs.symlinkSync(_distPath, tempPath, 'dir');
       });
 
       return;
