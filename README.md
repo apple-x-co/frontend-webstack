@@ -19,8 +19,10 @@ touch src/templates/index.ejs
 touch src/templates/_header.ejs
 
 cp -ap THIS_PROJECT/.gitignore .
+cp -ap THIS_PROJECT/assets-symlink-maker.mjs .
 cp -ap THIS_PROJECT/main.js .
 cp -ap THIS_PROJECT/rollup.config.mjs .
+cp -ap THIS_PROJECT/style-writer.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
 cp -ap THIS_PROJECT/template-contexts.mjs .
 cp -ap THIS_PROJECT/template-global.mjs .
