@@ -70,3 +70,14 @@ npm run watch
 ```
 
 ※ `dist/` に出力は行いません。
+
+## Not recommended
+
+### コアファイルの編集
+
+フレームワークの改善・修正で修正する可能性があるためプロジェクト毎に変更することはおすすめしません。
+
+* [assets-symlink-maker.mjs](assets-symlink-maker.mjs)
+* [rollup.config.mjs](rollup.config.mjs)
+* [style-writer.mjs](style-writer.mjs)
+* [template-compiler.mjs](template-compiler.mjs)
